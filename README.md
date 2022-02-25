@@ -16,11 +16,11 @@ pip install -r requirements.txt
 ```
 2) Instanciar o Servidor
 ```
-python3 debug_server.py
+python3 debug_server.py ou python debug_server.py
 ```
 3) Instanciar Clientes
 ```
-python3 debug_client.py
+python3 debug_client.py ou python debug_server.py
 ```
 
 **Informações a respeito do Servidor**
