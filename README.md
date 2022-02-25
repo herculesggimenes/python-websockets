@@ -36,10 +36,27 @@ CONNECTION_STARTED='connection_started'
 CONNECTION_CLOSED='connection_closed'
 ```
 
+- Modelo Mensagem do Cliente 
+```
+{
+    'client_id': Id Único do Cliente,
+    'type': Tipo de Evento,
+    'value': mensagem,
+}
+```
+
+- Modelo Mensagem do Servidor 
+```
+{
+    'type': Tipo de Evento,
+    'value': mensagem,
+}
+```
+
 - Modelo de Evento de Log
 ```
 Event: Tipo de Evento
-Server Address:{event.server_address}
-Client Id:{event.client_id}
-Message:{event.value}'
+Server Address: Ip do Servidor
+Client Id: Id do Client
+Message: Mensagem Enviada / Recebida
 ```
