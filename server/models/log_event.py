@@ -4,11 +4,12 @@ from ctypes import Union
 from dataclasses import dataclass
 from typing import Tuple
 
+
 @dataclass
 class LogEvent:
     event: str
     server_address: str
-    client_socket_id:str
+    client_socket_id: str
     client_id: int
     value: str
 

@@ -5,7 +5,8 @@ from server.models.log_event import LogEvent
 
 class Logger:
     def __init__(self):
-        self._cache: list[LogEvent] = list()  # TODO: Substituir cache local por um service de fila, para que outros serviços consumam os dados
+        # TODO: Substituir cache local por um service de fila, para que outros serviços consumam os dados
+        self._cache: list[LogEvent] = list()
 
     @staticmethod
     def _debug_print_event(event: LogEvent):
@@ -18,7 +19,6 @@ class Logger:
     def _insert_event_inside_cache(self, event: LogEvent) -> bool:
         success = self._cache.append(event)
         return success
-
 
     def register_event(self, event: LogEvent):
         self._insert_event_inside_cache(event)

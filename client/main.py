@@ -11,8 +11,6 @@ from client.enums.message_type import MessageType
 from client.enums.odd_or_even import OddOrEven
 
 
-
-
 class Client:
     def __init__(self):
         self._ws: WebSocketApp = None
@@ -44,11 +42,13 @@ class Client:
             print(f"###{self._client_id} failed, reason:{message.value} ###")
             raise Exception(message.value)
         elif message.type == MessageType.SET_INITIAL_VALUE.value:  # Initial Value Saved in Server
-            print(f"###{self._client_id} setting initial value:{message.value} ###")
+            print(
+                f"###{self._client_id} setting initial value:{message.value} ###")
             self._value = int(message.value)
             self._handshaken = True
         elif message.type == MessageType.INCREMENT.value:
-            print(f"###{self._client_id} incremented from {self._increment} to {message.value} ###")
+            print(
+                f"###{self._client_id} incremented from {self._increment} to {message.value} ###")
             self._increment = int(message.value)
 
     def _on_connection_error(self, ws, error):
@@ -75,7 +75,8 @@ class Client:
                         ClientMessage.create_message_json(
                             self._client_id,
                             MessageType.INCREMENT,
-                            OddOrEven.ODD.value if randint(1, 2) == 1 else OddOrEven.EVEN.value
+                            OddOrEven.ODD.value if randint(
+                                1, 2) == 1 else OddOrEven.EVEN.value
                         )
                     )
 

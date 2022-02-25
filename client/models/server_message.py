@@ -7,8 +7,8 @@ from client.enums.message_type import MessageType
 
 @dataclass
 class ServerMessage:
-    type:MessageType
-    value:str
+    type: MessageType
+    value: str
 
     def __init__(self, raw_message_json: str):
         message_dict = json.loads(raw_message_json)
@@ -16,9 +16,9 @@ class ServerMessage:
         self.value = message_dict['value']
 
     @staticmethod
-    def create_message_json(type:MessageType, value:str):
+    def create_message_json(type: MessageType, value: str):
         json_dict = {
-            'type':type.value,
-            'value':value,
+            'type': type.value,
+            'value': value,
         }
         return json.dumps(json_dict)

@@ -62,7 +62,8 @@ class Server:
         return client_id
 
     def _create_client(self, client_socket_id: str, client_id: str) -> ServerCacheObject:
-        server_cache_object = ServerCacheObject(str(client_socket_id), client_id)
+        server_cache_object = ServerCacheObject(
+            str(client_socket_id), client_id)
         self._cache[client_id] = server_cache_object
         return server_cache_object
 
@@ -105,7 +106,8 @@ class Server:
         client_value = self._get_client_value_by_client_id(message.client_id)
 
         if not client_value:
-            client_value = self._create_client(client_websocket['id'], message.client_id).value
+            client_value = self._create_client(
+                client_websocket['id'], message.client_id).value
 
         server_message = ServerMessage.create_message_json(
             MessageType.SET_INITIAL_VALUE,
@@ -130,7 +132,8 @@ class Server:
                                 message: ClientMessage):
         if not OddOrEven.has_value(message.value):
             return self._send_error_message_to_client_websocket(client_websocket, "Invalid OddOrEven")
-        incrementer = self._return_even() if message.value == OddOrEven.EVEN.value else self._return_odd()
+        incrementer = self._return_even(
+        ) if message.value == OddOrEven.EVEN.value else self._return_odd()
         server_message = ServerMessage.create_message_json(
             MessageType.INCREMENT,
             incrementer
@@ -152,7 +155,8 @@ class Server:
 
     # Called for every client disconnecting
     def _client_websocket_left(self, client_websocket: ClientWebsocket, server: WebsocketServer) -> None:
-        client_id = self._get_client_id_by_client_websocket_id(str(client_websocket['id']))
+        client_id = self._get_client_id_by_client_websocket_id(
+            str(client_websocket['id']))
         if client_id:
             event = LogEvent(MessageType.CONNECTION_CLOSED.value,
                              client_websocket["address"],
@@ -163,8 +167,8 @@ class Server:
             self._logger.register_event(event)
             self._update_client_websocket_id(client_id)
 
-
     # Called for every new client
+
     def _client_websocket_connected(self, client_websocket: ClientWebsocket, server: WebsocketServer) -> None:
         event = LogEvent(MessageType.CONNECTION_STARTED,
                          client_websocket['address'],
@@ -195,7 +199,8 @@ class Server:
             self._update_client_value(message.client_id, message.value)
 
     def _start(self) -> None:
-        server = WebsocketServer(host=os.getenv("HOST_URL"), port=int(os.getenv("HOST_PORT")))
+        server = WebsocketServer(host=os.getenv(
+            "HOST_URL"), port=int(os.getenv("HOST_PORT")))
         server.set_fn_new_client(self._client_websocket_connected)
         server.set_fn_client_left(self._client_websocket_left)
         server.set_fn_message_received(self._client_message_received)
