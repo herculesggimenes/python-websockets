@@ -16,11 +16,11 @@ pip install -r requirements.txt
 ```
 2) Instanciar o Servidor
 ```
-python3 debug_server.py
+python3 debug_server.py ou python debug_server.py
 ```
 3) Instanciar Clientes
 ```
-python3 debug_client.py
+python3 debug_client.py ou python debug_server.py
 ```
 
 **Informações a respeito do Servidor**
@@ -36,10 +36,27 @@ CONNECTION_STARTED='connection_started'
 CONNECTION_CLOSED='connection_closed'
 ```
 
+- Modelo Mensagem do Cliente 
+```
+{
+    'client_id': Id Único do Cliente,
+    'type': Tipo de Evento,
+    'value': mensagem,
+}
+```
+
+- Modelo Mensagem do Servidor 
+```
+{
+    'type': Tipo de Evento,
+    'value': mensagem,
+}
+```
+
 - Modelo de Evento de Log
 ```
 Event: Tipo de Evento
-Server Address:{event.server_address}
-Client Id:{event.client_id}
-Message:{event.value}'
+Server Address: Ip do Servidor
+Client Id: Id do Client
+Message: Mensagem Enviada / Recebida
 ```
