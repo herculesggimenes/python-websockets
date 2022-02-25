@@ -195,10 +195,11 @@ class Server:
             self._update_client_value(message.client_id, message.value)
 
     def _start(self) -> None:
-        server = WebsocketServer(host=os.getenv("HOST_URL"), port=int(os.getenv("HOST_PORT")), loglevel=logging.CRITICAL)
+        server = WebsocketServer(host=os.getenv("HOST_URL"), port=int(os.getenv("HOST_PORT")))
         server.set_fn_new_client(self._client_websocket_connected)
         server.set_fn_client_left(self._client_websocket_left)
         server.set_fn_message_received(self._client_message_received)
+        print("Event:Server Started, Waiting for Client Connection...")
         server.run_forever()
 
     def start(self) -> None:
